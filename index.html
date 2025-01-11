@@ -7,6 +7,23 @@
     <title>SpendWise</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
+    <style>
+        /* Add styles for the green-screen video */
+        #loadingVideo {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        #suggestion {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,54 +51,58 @@
         <div id="suggestion" class="suggestion"></div>
     </div>
 
+    <!-- Add the video element for the green screen -->
+    <video id="loadingVideo" autoplay muted loop>
+        <source src="loading/cat.mp4" type="video/mp4">
+    </video>
+
     <script>
-        document.getElementById("suggestButton").addEventListener("click", async () => {
-            const expense = document.getElementById("expense").value;
-    
+        const suggestButton = document.getElementById("suggestButton");
+        const expenseInput = document.getElementById("expense");
+        const suggestionDiv = document.getElementById("suggestion");
+        const loadingVideo = document.getElementById("loadingVideo");
+
+        suggestButton.addEventListener("click", async () => {
+            const expense = expenseInput.value;
+
             if (!expense.trim()) {
                 alert("Please enter your expense!");
                 return;
             }
-    
+
+            // Show the loading video
+            loadingVideo.style.display = "block";
+
             try {
                 const response = await fetch("http://localhost:5000/spendwise", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ expense }),
                 });
-    
+
                 if (!response.ok) {
                     throw new Error(`Server error: ${response.statusText}`);
                 }
-    
-                const data = await response.json(); // Parse the JSON response
-                const suggestionDiv = document.getElementById("suggestion");
-    
+
+                const data = await response.json();
+
                 if (data.suggestion) {
-                    // Extract the text from parts
                     const suggestionText = data.suggestion.parts[0].text;
-    
-                    // Replace double asterisks with HTML <strong> tags for bold formatting
                     const formattedText = suggestionText.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
-    
-                    // Set the formatted text as HTML content
                     suggestionDiv.innerHTML = formattedText;
-                    suggestionDiv.style.display = "block";
                 } else {
                     suggestionDiv.textContent = "Unable to fetch a suggestion. Please try again.";
-                    suggestionDiv.style.display = "block";
                 }
             } catch (error) {
                 console.error("Error:", error);
-                const suggestionDiv = document.getElementById("suggestion");
                 suggestionDiv.textContent = "An error occurred. Please try again.";
+            } finally {
+                // Hide the loading video
+                loadingVideo.style.display = "none";
                 suggestionDiv.style.display = "block";
             }
         });
     </script>
-    
-    
-    
 </body>
 
 </html>
