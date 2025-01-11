@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpendWise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <h1>💸SpendWise</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">SpendWise</a></li>
+                <li><a href="investWise.html">InvestWise</a></li>
+                <li><a href="loanWise.html">LoanWise</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>💸SpendWise💸</h2>
+        <div class="form-group">
+            <label class="expense" for="expense">Enter your expenses:</label>
+            <input type="text" id="expense" placeholder="e.g., $50 on coffee">
+        </div>
+        <button id="suggestButton">Get Suggestions</button>
+        <div id="suggestion" class="suggestion"></div>
+    </div>
+
+    <script>
+        document.getElementById("suggestButton").addEventListener("click", async () => {
+            const expense = document.getElementById("expense").value;
+    
+            if (!expense.trim()) {
+                alert("Please enter your expense!");
+                return;
+            }
+    
+            try {
+                const response = await fetch("http://localhost:5000/spendwise", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ expense }),
+                });
+    
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.statusText}`);
+                }
+    
+                const data = await response.json(); // Parse the JSON response
+                const suggestionDiv = document.getElementById("suggestion");
+    
+                if (data.suggestion) {
+                    // Extract the text from parts
+                    const suggestionText = data.suggestion.parts[0].text;
+    
+                    // Replace double asterisks with HTML <strong> tags for bold formatting
+                    const formattedText = suggestionText.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+    
+                    // Set the formatted text as HTML content
+                    suggestionDiv.innerHTML = formattedText;
+                    suggestionDiv.style.display = "block";
+                } else {
+                    suggestionDiv.textContent = "Unable to fetch a suggestion. Please try again.";
+                    suggestionDiv.style.display = "block";
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                const suggestionDiv = document.getElementById("suggestion");
+                suggestionDiv.textContent = "An error occurred. Please try again.";
+                suggestionDiv.style.display = "block";
+            }
+        });
+    </script>
+    
+    
+    
+</body>
+
+</html>

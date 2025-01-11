@@ -1,0 +1,119 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #171717;
+    overflow-y: scroll; /* Optional: Enable vertical scrolling without scrollbar */
+}
+
+.header {
+    background: #2f2f2f;
+    max-height: 25%;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+h3 {
+    color: #ececec;
+}
+
+label {
+    color: #ececec;
+} 
+
+.logo h1 {
+    font-size: 24px;
+    color: #ececec;
+    font-weight: 600;
+    margin: 0;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 100px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a:hover {
+    color: #8f94fb;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #ececec;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.container {
+    max-width: 1000px;
+    width: 90%;
+    padding: 40px;
+    background: #212121;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fade-in 1.5s ease-out;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    background: #212121;
+}
+
+.btn-primary {
+    background-color: #2f2f2f;
+    border: none;
+}
+.btn-primary:hover {
+    background-color: #5a5656;
+}
+.results {
+    margin-top: 30px;
+}
+
+
+#recommendation {
+  color: white; /* Makes the text white */
+  background-color: #2f2f2f; /* Adds a dark background for contrast */
+  padding: 15px; /* Adds some spacing inside the container */
+  border-radius: 8px; /* Rounds the edges */
+  font-size: 16px; /* Makes the text easily readable */
+  line-height: 1.5; /* Adds spacing between lines for readability */
+  margin-bottom: 15px; /* Adds spacing between sections */
+}
+
+/* Optional: Hover effect for interaction */
+#recommendation:hover {
+  background-color: #5a5656; /* Slightly lighter background on hover */
+  transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+/* Optional: Add a heading style if needed */
+#recommendation strong{
+  font-size: 18px; /* Slightly larger font for headings */
+  color: #ececec; /* Highlight headings with a gold color */
+}
