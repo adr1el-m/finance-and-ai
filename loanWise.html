@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LoanWise</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="loanWise.css">
+    <link rel="stylesheet" href="public/css/loanWise.css">
     <style>
         /* Add styles for the green-screen video */
         #loadingVideo {
@@ -28,10 +28,10 @@
     <header class="header">
         <nav class="navbar">
             <div class="logo">
-                <h1>💸LoanWise</h1>
+                <h1>🤝LoanWise</h1>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">SpendWise</a></li>
+                <li><a href="spendWise.html">SpendWise</a></li>
                 <li><a href="investWise.html">InvestWise</a></li>
                 <li><a href="loanWise.html">LoanWise</a></li>
             </ul>
@@ -39,46 +39,87 @@
     </header>
 
     <div class="container mt-5">
+        <h2>💸LoanWise💸</h2>
         <div class="card p-4">
             <form id="loanForm">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="age" class="form-label">Age</label>
+                        <select class="form-select" id="age" required>
+                            <option value="" disabled selected>Select your age range</option>
+                            <option value="18-25">18-25</option>
+                            <option value="26-35">26-35</option>
+                            <option value="36-50">36-50</option>
+                            <option value="51+">51+</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="income" class="form-label">Monthly Income</label>
+                        <input type="number" class="form-control" id="income" placeholder="Enter your income" min="0" required>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="age" class="form-label">Age</label>
-                    <select class="form-select" id="age" required>
-                        <option value="" disabled selected>Select your age range</option>
-                        <option value="18-25">18-25</option>
-                        <option value="26-35">26-35</option>
-                        <option value="36-50">36-50</option>
-                        <option value="51+">51+</option>
-                    </select>
+    
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="loanAmount" class="form-label">Loan Amount</label>
+                        <input type="number" class="form-control" id="loanAmount" placeholder="Enter your desired loan amount" min="0" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="repaymentPeriod" class="form-label">Repayment Period (in months)</label>
+                        <input type="number" class="form-control" id="repaymentPeriod" placeholder="Enter repayment period" min="1" required>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="income" class="form-label">Monthly Income</label>
-                    <input type="number" class="form-control" id="income" placeholder="Enter your income" min="0" required>
+    
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="interestRate" class="form-label">Interest Rate (%)</label>
+                        <input type="number" class="form-control" id="interestRate" placeholder="Enter interest rate" step="0.01" min="0" max="100" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="employmentStatus" class="form-label">Employment Status</label>
+                        <select class="form-select" id="employmentStatus" required>
+                            <option value="" disabled selected>Select your employment status</option>
+                            <option value="Employed">Employed</option>
+                            <option value="Self-employed">Self-employed</option>
+                            <option value="Unemployed">Unemployed</option>
+                            <option value="Student">Student</option>
+                        </select>
+                    </div>
                 </div>
+    
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="loanTermPreferences" class="form-label">Loan Term Preferences</label>
+                        <select class="form-select" id="loanTermPreferences" required>
+                            <option value="" disabled selected>Select loan term preference</option>
+                            <option value="Short-term">Short-term (less than 5 years)</option>
+                            <option value="Medium-term">Medium-term (5 to 10 years)</option>
+                            <option value="Long-term">Long-term (more than 10 years)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="repaymentFrequency" class="form-label">Loan Repayment Frequency</label>
+                        <select class="form-select" id="repaymentFrequency" required>
+                            <option value="" disabled selected>Select repayment frequency</option>
+                            <option value="Monthly">Monthly</option>
+                            <option value="Quarterly">Quarterly</option>
+                            <option value="Annually">Annually</option>
+                        </select>
+                    </div>
+                </div>
+    
                 <div class="mb-3">
                     <label for="goal" class="form-label">Loan Purpose</label>
                     <input type="text" class="form-control" id="goal" placeholder="Enter your loan purpose" required>
                 </div>
+    
                 <div class="mb-3">
-                    <label for="loanAmount" class="form-label">Loan Amount</label>
-                    <input type="number" class="form-control" id="loanAmount" placeholder="Enter your desired loan amount" min="0" required>
+                    <label for="creditScore" class="form-label">Credit Score</label>
+                    <input type="number" class="form-control" id="creditScore" placeholder="Enter your credit score" min="300" max="850" required>
                 </div>
-                <div class="mb-3">
-                    <label for="repaymentPeriod" class="form-label">Repayment Period (in months)</label>
-                    <input type="number" class="form-control" id="repaymentPeriod" placeholder="Enter repayment period" min="1" required>
-                </div>
-                <div class="mb-3">
-                    <label for="interestRate" class="form-label">Interest Rate (%)</label>
-                    <input type="number" class="form-control" id="interestRate" placeholder="Enter interest rate" step="0.01" min="0" max="100" required>
-                </div>
-
+    
                 <button type="submit" class="btn btn-primary w-100">Get Loan Plan</button>
             </form>
-
             <div class="results mt-5">
                 <h3>Recommendations</h3>
                 <div class="border p-3 rounded" id="recommendation">
@@ -88,7 +129,7 @@
         </div>
     </div>
 
-    <video id="loadingVideo" autoplay muted loop>
+    <video id="loadingVideo" loop>
         <source src="loading/cat.mp4" type="video/mp4">
     </video>
 
@@ -96,52 +137,60 @@
         document.getElementById("loanForm").addEventListener("submit", async function(event) {
             event.preventDefault();
 
-            // Collect form data
-            const name = document.getElementById("name").value;
             const age = document.getElementById("age").value;
             const income = document.getElementById("income").value;
             const goal = document.getElementById("goal").value;
             const loanAmount = document.getElementById("loanAmount").value;
             const repaymentPeriod = document.getElementById("repaymentPeriod").value;
             const interestRate = document.getElementById("interestRate").value;
+            const employmentStatus = document.getElementById("employmentStatus").value;
+            const creditScore = document.getElementById("creditScore").value;
+            const loanTermPreferences = document.getElementById("loanTermPreferences").value;
+            const repaymentFrequency = document.getElementById("repaymentFrequency").value;
 
             try {
-                // Show loading video
-                document.getElementById("loadingVideo").style.display = "block";
+                const loadingVideo = document.getElementById("loadingVideo");
+                loadingVideo.style.display = "block";
+                loadingVideo.currentTime = 0;
+                loadingVideo.loop = true;
+                await loadingVideo.play().catch(e => console.log("Auto-play was prevented"));
 
-                // Send data to the server
                 const response = await fetch("http://localhost:5000/loanwise", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ loanPurpose: goal, loanAmount, monthlyIncome: income, repaymentCapacity: income, loanTerm: repaymentPeriod, interestRate })
+                    body: JSON.stringify({
+                        loanPurpose: goal,
+                        loanAmount,
+                        monthlyIncome: income,
+                        repaymentCapacity: income,  // You might want to change this depending on your actual fields
+                        loanTerm: repaymentPeriod,
+                        interestRate,
+                        employmentStatus,
+                        creditScore,
+                        loanTermPreferences,
+                        repaymentFrequency
+                    })
                 });
 
-                // Hide loading video once response is received
-                document.getElementById("loadingVideo").style.display = "none";
+                loadingVideo.style.display = "none";
+                loadingVideo.pause();
+                loadingVideo.currentTime = 0;
 
                 if (response.ok) {
                     const data = await response.json();
-                    
-                    // Format the text to handle bold formatting and line breaks
                     const formattedPlan = data.suggestion
                         .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
                         .replace(/\n\n/g, "<br><br>")
                         .replace(/\n/g, "<br>");
-            
-                    // Display the formatted recommendation
-                    document.getElementById("recommendation").innerHTML = `
-                        <strong>Loan Advice:</strong> ${formattedPlan}
-                    `;
+                    document.getElementById("recommendation").innerHTML = `<strong>Loan Advice:</strong> ${formattedPlan}`;
                 } else {
-                    document.getElementById("recommendation").innerHTML = `
-                        <strong>Error:</strong> Unable to fetch recommendations. Please try again later.
-                    `;
+                    const errorResponse = await response.json();
+                    console.log("API error response:", errorResponse);
+                    document.getElementById("recommendation").innerHTML = `<strong>Error:</strong> ${errorResponse.error || 'Unable to fetch recommendations. Please try again later.'}`;
                 }
             } catch (error) {
                 console.error("Error fetching loan advice:", error);
-                document.getElementById("recommendation").innerHTML = `
-                    <strong>Error:</strong> Something went wrong. Please try again later.
-                `;
+                document.getElementById("recommendation").innerHTML = `<strong>Error:</strong> Something went wrong. Please try again later.`;
             }
         });
     </script>

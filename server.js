@@ -13,20 +13,27 @@ console.log("API Key:", API_KEY);
 
 // Endpoint for SpendWise
 app.post("/spendwise", async (req, res) => {
-    const { expense } = req.body;
+    const { expense, income, priority, alternatives, savings, spendingHabits } = req.body;
 
-    if (!expense) {
-        return res.status(400).json({ error: "Expense input is required." });
+    if (!expense || !income || !priority || !alternatives || !savings || !spendingHabits) {
+        return res.status(400).json({ error: "All fields are required." });
     }
 
     const prompt = `
     Act as a professional financial advisor.
-    The user has entered the following expense: "${expense}".
+    The user has the following details:
+    Monthly income: "$${income}"
+    The user has entered the following expense: "${expense}"
+    Priority of Expense: "${priority}"
+    Alternatives to the expense: "${alternatives}"
+    Current Savings/Investments: "${savings}"
+    Spending Habits: "${spendingHabits}"
+    
     Provide:
-    1. Suggestions on how the user can manage their spending more wisely.
+    1. Suggestions on how the user can manage their spending more wisely, considering their income.
     2. Alternative budget-friendly approaches or substitutions for the mentioned expense.
     3. Insights on how this expense impacts long-term financial goals and how to better align it with savings or financial stability.
-    4. Practical tips or habits to develop better financial discipline related to such expenses.
+    4. Practical tips or habits to develop better financial discipline related to such expenses, with the user's income in mind.
     `;
 
     try {
@@ -64,21 +71,27 @@ app.post("/spendwise", async (req, res) => {
     }
 });
 
+
 // Endpoint for InvestWise
 app.post("/investwise", async (req, res) => {
-    const { age, goal, riskTolerance } = req.body;
+    const { age, goal, riskTolerance, experience, emergencyFund, debtStatus, comments } = req.body;
 
     if (!age || !goal || !riskTolerance) {
         return res.status(400).json({ error: "Age, goal, and risk tolerance are required inputs." });
     }
 
     const prompt = `
-    Act as a professional financial advisor, but don't make your response like you are in a meeting.
-    The user is ${age} years old, with an investment goal of "${goal}", and a risk tolerance level of "${riskTolerance}".
+    Act as a professional financial advisor. The user is ${age} years old, with an investment goal of "${goal}", and a risk tolerance level of "${riskTolerance}".
+    Additional details:
+    - Investment experience: ${experience}
+    - Emergency fund availability: ${emergencyFund}
+    - Debt status: ${debtStatus}
+    - Additional comments: ${comments}
+    
     Provide:
     1. A tailored investment plan (e.g., mutual funds, stocks, or bonds).
     2. A detailed risk analysis that evaluates:
-       - Potential risks specific to the user's age and risk tolerance.
+       - Potential risks specific to the user's age, experience, and financial situation.
        - How these risks might impact achieving their investment goal.
        - Recommendations to mitigate these risks without compromising the goal.
     `;
@@ -110,12 +123,15 @@ app.post("/investwise", async (req, res) => {
     }
 });
 
-app.post("/loanwise", async (req, res) => {
-    const { loanPurpose, loanAmount, monthlyIncome, repaymentCapacity, loanTerm, interestRate } = req.body;
 
-    // Validate inputs
-    if (!loanPurpose || !loanAmount || !monthlyIncome || !repaymentCapacity || !loanTerm || !interestRate) {
-        return res.status(400).json({ error: "All fields are required." });
+
+app.post("/loanwise", async (req, res) => {
+    console.log(req.body);  // Log the request body to check if all fields are present
+
+    const { loanPurpose, loanAmount, monthlyIncome, repaymentCapacity, loanTerm, interestRate, employmentStatus, creditScore, loanTermPreferences, repaymentFrequency } = req.body;
+
+    if (!loanPurpose || !loanAmount || !monthlyIncome || !repaymentCapacity || !loanTerm || !interestRate || !employmentStatus || !creditScore || !loanTermPreferences || !repaymentFrequency) {
+        return res.status(400).json({ error: "All fields are required" });
     }
 
     const prompt = `
@@ -127,12 +143,16 @@ app.post("/loanwise", async (req, res) => {
     - Repayment Capacity: ${repaymentCapacity}
     - Loan Term: ${loanTerm} months
     - Interest Rate: ${interestRate}%
+    - Employment Status: ${employmentStatus}
+    - Credit Score: ${creditScore}
+    - Loan Term Preferences: ${loanTermPreferences}
+    - Repayment Frequency: ${repaymentFrequency}
     
     Provide:
-    1. A recommendation on whether the loan amount is suitable based on their monthly income and repayment capacity.
+    1. A recommendation on whether the loan amount is suitable based on their monthly income, repayment capacity, and credit score.
     2. Suggestions for the most appropriate loan term and type of loan (e.g., personal loan, mortgage).
     3. Tips for minimizing interest payments and ensuring financial stability while repaying the loan.
-    4. Advice on alternatives if the loan appears financially risky.
+    4. Advice on alternatives if the loan appears financially risky based on their employment status and credit score.
     `;
 
     try {
@@ -145,14 +165,16 @@ app.post("/loanwise", async (req, res) => {
             const suggestion = result.response.candidates[0].content.parts[0].text;
             res.json({ suggestion });
         } else {
-            console.error("Invalid LoanWise API Response:", result);
+            console.error("Invalid LoanWise API Response:", result); // Log invalid response
             res.status(500).json({ error: "Failed to get a valid suggestion." });
         }
     } catch (error) {
-        console.error("Error in /loanwise route:", error.message);
+        console.error("Error in /loanwise route:", error.message); // Log error
         res.status(500).json({ error: "Failed to fetch suggestion. Check server logs for details." });
     }
 });
+
+
 
 
 const PORT = 5000;

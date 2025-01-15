@@ -1,0 +1,308 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0f1f 0%, #171721 100%);
+    overflow-y: scroll;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(41, 196, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255, 41, 112, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.header {
+    background: rgba(47, 47, 47, 0.8); /* semi-transparent background */
+    backdrop-filter: blur(10px); /* smooth blur effect for a modern look */
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 36px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(78, 84, 200, 0.8), 0 0 20px rgba(143, 148, 251, 0.8);
+    margin-bottom: 30px;
+}
+
+h3 {
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+label {
+    color: #ececec;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.logo h1 {
+    font-size: 24px;
+    color: #ececec;
+    font-weight: 600;
+    margin: 0;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 100px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #ececec;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 8px 16px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.nav-links li a:hover {
+    color: #8f94fb;
+    text-shadow: 0 0 10px rgba(143, 148, 251, 0.5);
+}
+
+.container {
+    max-width: 1000px;
+    width: 90%;
+    padding: 40px;
+    background: rgba(33, 33, 33, 0.8);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    animation: fade-in 1.5s ease-out;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card {
+    background: transparent;
+    border: none;
+    padding: 30px;
+}
+
+.form-control {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px;
+    color: #fff;
+    transition: all 0.3s ease;
+    color: #fff;
+
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #4e54c8;
+    box-shadow: 0 0 20px rgba(78, 84, 200, 0.2);
+    color: #fff;
+
+}
+
+.form-select {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.form-select:focus {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: #4e54c8;
+    box-shadow: 0 0 20px rgba(78, 84, 200, 0.2);
+    color: #ffffff;
+}
+
+.form-control {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 10px;
+    color: #fff;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #4e54c8;
+    box-shadow: 0 0 20px rgba(78, 84, 200, 0.2);
+    color: #fff;
+
+}
+
+.form-select {
+    background: rgba(255, 255, 255, 0.08); /* Updated background */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 10px;
+    color: #fff;
+
+}
+
+select {
+    background: rgba(0, 0, 0, 0.8);
+    color: white; /* Optional: To ensure text is visible */
+    border: none; /* Optional: To style the dropdown further */
+    padding: 0.5rem; /* Optional: For better spacing */
+    border-radius: 5px; /* Optional: Adds rounded corners */
+}
+
+/* For styling the dropdown options */
+select option {
+    background: rgba(0, 0, 0, 0.8);
+    color: white; /* Ensure the text is visible */
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #4e54c8, #8f94fb);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #4e54c8, #8f94fb);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(78, 84, 200, 0.4);
+}
+
+#recommendation {
+    color: white;
+    background: rgba(47, 47, 47, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-top: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+#recommendation:hover {
+    background: rgba(90, 86, 86, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+#recommendation strong {
+    font-size: 18px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Loading animation */
+#loadingVideo {
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(78, 84, 200, 0.3);
+}
+
+/* Animations */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        gap: 40px;
+    }
+    
+    .container {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-links {
+        gap: 20px;
+    }
+    
+    .container {
+        padding: 15px;
+        width: 95%;
+    }
+}

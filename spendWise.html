@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpendWise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/css/spendWise.css">
+    <style>
+        /* Add styles for the green-screen video */
+        #loadingVideo {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        #suggestion {
+            margin-top: 20px;
+        }
+
+        /* Layout fixes */
+        .form-group {
+            margin-bottom: 20px; /* Adds space between the input box and button */
+        }
+
+        .form-group input,
+        .form-group select {
+    width: 100%;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05); /* Transparent background */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #ffffff; /* Set text color to white */
+    transition: all 0.3s ease;
+    appearance: none; /* Remove default arrow */
+}
+
+        .form-group input:focus,
+        .form-group select:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #4e54c8;
+    box-shadow: 0 0 20px rgba(78, 84, 200, 0.2);
+}
+
+
+.form-group select option {
+    background: rgba(0, 0, 0, 0.8); /* Dark background for options */
+    color: #ffffff; /* White text color */
+}
+        /* Horizontal Layout */
+        .form-row {
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .form-row .form-group {
+            flex: 1 1 45%; /* Allows two fields to sit side by side */
+            min-width: 250px;
+        }
+
+        /* Adjust button style */
+        button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #4e54c8, #8f94fb);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(78, 84, 200, 0.4);
+            text-shadow: 0 0 10px rgba(78, 84, 200, 0.8), 0 0 20px rgba(143, 148, 251, 0.8);
+        }
+
+        /* Suggestion Box */
+        .suggestion {
+            color: white;
+            background: rgba(47, 47, 47, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-top: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: none;
+            white-space: pre-wrap;
+            text-align: left;
+        }
+
+        .suggestion:hover {
+            background: rgba(90, 86, 86, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        /* Loading animation */
+        #loadingVideo {
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(78, 84, 200, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="navbar">
+            <!-- Logo Section -->
+            <div class="logo">
+                <h1>💸SpendWise</h1>
+            </div>
+    
+            <!-- Navigation Links -->
+            <nav class="nav-links">
+                <ul>
+                    <li><a href="spendWise.html">SpendWise</a></li>
+                    <li><a href="investWise.html">InvestWise</a></li>
+                    <li><a href="loanWise.html">LoanWise</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>💸SpendWise💸</h2>
+        <div class="form-group">
+            <label class="income" for="income">Enter your monthly income:</label>
+            <input type="number" id="income" placeholder="e.g., $3000">
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label class="expense" for="expense">Enter your expenses:</label>
+                <input type="text" id="expense" placeholder="e.g., $50 on coffee">
+            </div>
+            <div class="form-group">
+                <label for="priority">Priority of Expense:</label>
+                <input type="text" id="priority" placeholder="e.g., High, Medium, Low">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="alternatives">Possible Alternatives to the Expense:</label>
+            <input type="text" id="alternatives" placeholder="e.g., Make coffee at home">
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="savings">Your Current Savings/Investment:</label>
+                <input type="number" id="savings" placeholder="e.g., $1000">
+            </div>
+            <div class="form-group">
+                <label for="spendingHabits">Spending Habits (Impulse or Planned):</label>
+                <select id="spendingHabits">
+                    <option value="Impulse">Impulse</option>
+                    <option value="Planned">Planned</option>
+                </select>
+            </div>
+        </div>
+        <button id="suggestButton">Get Suggestions</button>
+        <div id="suggestion" class="suggestion"></div>
+    </div>
+
+    <!-- Add the video element for the green screen -->
+    <video id="loadingVideo" loop>
+        <source src="loading/cat.mp4" type="video/mp4">
+    </video>
+
+    <script>
+        const suggestButton = document.getElementById("suggestButton");
+        const expenseInput = document.getElementById("expense");
+        const suggestionDiv = document.getElementById("suggestion");
+        const loadingVideo = document.getElementById("loadingVideo");
+    
+        suggestButton.addEventListener("click", async () => {
+            const expense = expenseInput.value;
+            const income = document.getElementById("income").value;
+            const priority = document.getElementById("priority").value;
+            const alternatives = document.getElementById("alternatives").value;
+            const savings = document.getElementById("savings").value;
+            const spendingHabits = document.getElementById("spendingHabits").value;
+    
+            if (!expense.trim() || !income.trim()) {
+                alert("Please enter both your income and expense!");
+                return;
+            }
+    
+            // Show the loading video and ensure audio plays
+            loadingVideo.style.display = "block";
+            loadingVideo.currentTime = 0; // Reset to start
+            try {
+                await loadingVideo.play();
+            } catch (e) {
+                console.log("Auto-play was prevented");
+            }
+    
+            try {
+                const response = await fetch("http://localhost:5000/spendwise", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ expense, income, priority, alternatives, savings, spendingHabits }),
+                });
+    
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.statusText}`);
+                }
+    
+                const data = await response.json();
+    
+                if (data.suggestion) {
+                    const suggestionText = data.suggestion.parts[0].text;
+                    const formattedText = suggestionText.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+    
+                    suggestionDiv.innerHTML = formattedText;
+                    suggestionDiv.style.display = "block";
+                }
+            } catch (error) {
+                suggestionDiv.innerHTML = "Sorry, something went wrong while processing your request.";
+                suggestionDiv.style.display = "block";
+            } finally {
+                // Stop the loading video immediately after the response
+                loadingVideo.style.display = "none";
+                loadingVideo.pause(); // Pause the video
+                loadingVideo.currentTime = 0; // Reset video to the beginning
+            }
+        });
+    </script>
+    
+    
+</body>
+
+</html>

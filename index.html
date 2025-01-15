@@ -4,103 +4,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpendWise</title>
+    <title>FinanceWise</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css">
-    <style>
-        /* Add styles for the green-screen video */
-        #loadingVideo {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 9999;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        #suggestion {
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="public/css/index.css">
 </head>
 
 <body>
+    <div id="particles-js"></div>
 
     <header class="header">
         <nav class="navbar">
             <div class="logo">
-                <h1>💸SpendWise</h1>
+                <h1>💰FinanceWise</h1>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">SpendWise</a></li>
+                <li><a href="spendWise.html">SpendWise</a></li>
                 <li><a href="investWise.html">InvestWise</a></li>
                 <li><a href="loanWise.html">LoanWise</a></li>
             </ul>
         </nav>
     </header>
 
-    <div class="container">
-        <h2>💸SpendWise💸</h2>
-        <div class="form-group">
-            <label class="expense" for="expense">Enter your expenses:</label>
-            <input type="text" id="expense" placeholder="e.g., $50 on coffee">
+    <main class="main">
+        <div class="hero">
+            <h3>Welcome to FinanceWise</h3>
+            <p>Take control of your finances with our advanced tools and resources tailored for your success.</p>
+            <div class="cta">
+                <a href="spendWise.html" class="btn-primary">Explore Now</a>
+            </div>
         </div>
-        <button id="suggestButton">Get Suggestions</button>
-        <div id="suggestion" class="suggestion"></div>
-    </div>
 
-    <!-- Add the video element for the green screen -->
-    <video id="loadingVideo" autoplay muted loop>
-        <source src="loading/cat.mp4" type="video/mp4">
-    </video>
+        <section class="features">
+            <div class="feature-card">
+                <div class="icon">💸</div>
+                <h4>Spend Wise</h4>
+                <p>Get personalized professional advice based on your financial circumstances</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📈</div>
+                <h4>Investment Wise</h4>
+                <p>Obtain customized investment suggestions reflecting your financial position</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🏦</div>
+                <h4>Loan Wise</h4>
+                <p>Access professional guidance suited to your loan needs</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 FinanceWise | All Rights Reserved</p>
+    </footer>
 
     <script>
-        const suggestButton = document.getElementById("suggestButton");
-        const expenseInput = document.getElementById("expense");
-        const suggestionDiv = document.getElementById("suggestion");
-        const loadingVideo = document.getElementById("loadingVideo");
-
-        suggestButton.addEventListener("click", async () => {
-            const expense = expenseInput.value;
-
-            if (!expense.trim()) {
-                alert("Please enter your expense!");
-                return;
-            }
-
-            // Show the loading video
-            loadingVideo.style.display = "block";
-
-            try {
-                const response = await fetch("http://localhost:5000/spendwise", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ expense }),
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Server error: ${response.statusText}`);
-                }
-
-                const data = await response.json();
-
-                if (data.suggestion) {
-                    const suggestionText = data.suggestion.parts[0].text;
-                    const formattedText = suggestionText.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
-                    suggestionDiv.innerHTML = formattedText;
-                } else {
-                    suggestionDiv.textContent = "Unable to fetch a suggestion. Please try again.";
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                suggestionDiv.textContent = "An error occurred. Please try again.";
-            } finally {
-                // Hide the loading video
-                loadingVideo.style.display = "none";
-                suggestionDiv.style.display = "block";
-            }
+        particlesJS.load('particles-js', 'loading/particlesjs-config.json', function () {
+            console.log('Particles.js loaded');
         });
     </script>
 </body>
