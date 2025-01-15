@@ -9,7 +9,6 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const API_KEY = process.env.GEMINI_API_KEY;
-console.log("API Key:", API_KEY);
 
 // Endpoint for SpendWise
 app.post("/spendwise", async (req, res) => {
